@@ -31,5 +31,8 @@ END
 
 my $parsed = Document.parse($paragraph);
 say $parsed;
-say $parsed<h1>
+say "h1 → $parsed<h1>";
+say "h2 → $parsed<section>";
+
+
 
