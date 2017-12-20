@@ -8,12 +8,14 @@ grammar Document {
 	       <section>*
 	       $ }
 
-    token h1 { $hash \h+ \V+ \h* $hash? }
+    token h1 { $hash \h+ <header> \h* $hash? }
     
     regex section { <h2> \v ** 2..*
 		    .*? }
     
-    token h2 {$hash**2 \h+ \V+ \h* ($hash**2)? }
+    token h2 {$hash**2 \h+ <header> \h* ($hash**2)? }
+
+    token header { \V+ }
 }
 
 my $paragraph = q:to/END/;
