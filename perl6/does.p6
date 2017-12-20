@@ -6,7 +6,7 @@ role like-a-word {
 }
 
 grammar simple-paragraph does like-a-word {
-    token TOP {^ <like-a-word> (\h+ <like-a-word>)+ $ }
+    token TOP {^ <like-a-word> [\h+ <like-a-word>]+ $ }
 }
 
 grammar better-paragraph does like-a-word {
