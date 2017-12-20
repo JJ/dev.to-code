@@ -1,8 +1,8 @@
 use Grammar::Tracer;
 
 grammar Document {
-    token TOP {^ <h1> \v ** 2..*
-	       <text>* 
+    regex TOP {^ <h1> \v ** 2..*
+	       .*? \v ** 2..*
 	       <section>*
 	       $ }
 
@@ -10,10 +10,8 @@ grammar Document {
 
     token h1 { <hash> \h+ \V+ \h* <hash>? }
     
-    token text { .+? \v ** 2 }
-
-    token section { <h2> \v ** 2..*
-		    <text>* }
+    regex section { <h2> \v ** 2..*
+		    .*? }
     
     token h2 {<hash>**2 \h+ \V+ \h* (<hash>**2)? }
 }
@@ -31,4 +29,5 @@ END
 
 my $parsed = Document.parse($paragraph);
 say $parsed;
+say $parsed<h1>
 
