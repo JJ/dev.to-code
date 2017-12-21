@@ -18,5 +18,20 @@ class Paragraph does Words {
     }
 }
 
+class Heading does Words {
+
+    submethod BUILD( :@!words ) {
+    }
+    
+    method to-string() {
+	return "\n<h1>" ~ self.Words::to-string( " " ) ~ "</h1>\n";
+    }
+}
+
 my $sentence = Paragraph.new(words => "these are the words".split(/\s+/));
+say $sentence.words;
 say $sentence.to-string();
+
+my $h1 = Heading.new(words => "Heading there".comb(/\w+/));
+say $h1.words;
+say $h1.to-string();
