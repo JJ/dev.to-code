@@ -2,7 +2,7 @@ use Grammar::Tracer;
 
 # Non-horizontal whitespace
 role like-a-word {
-    token like-a-word { «\S+» }
+    token like-a-word { «\H+» }
 }
 
 role span does like-a-word {
