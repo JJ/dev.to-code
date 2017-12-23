@@ -12,8 +12,10 @@ role span does like-a-word {
 role pair-quoted does span {
     proto regex quoted {*}
     regex quoted:sym<em> { '*' ~ '*' <span> }
+    regex quoted:sym<alsoem> { '~' ~ '~' <span> }
     regex quoted:sym<code> { '`' ~ '`' <span> }
     regex quoted:sym<strong> { '**' ~ '**' <span> }
+    regex quoted:sym<strike> { '~~' ~ '~~' <span> }
 }
 
 grammar better-paragraph does pair-quoted {
@@ -22,7 +24,7 @@ grammar better-paragraph does pair-quoted {
 }
 
 say better-paragraph.parse("Simple **thing**");
-say better-paragraph.parse("This is *a simple* paragraph");
+say better-paragraph.parse("This is *a simple* _paragraph_ with ~~struck~~ words");
 
 
 
