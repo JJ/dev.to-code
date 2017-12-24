@@ -23,7 +23,9 @@ grammar better-paragraph does pair-quoted {
     regex chunk {  <quoted> | <span> }
 }
 
-say better-paragraph.parse("Simple **thing**");
+my $simple-thing = better-paragraph.parse("Simple **thing**");
+$simple-thing<chunk>.put;
+$simple-thing<chunk>.map: { .put };
 say better-paragraph.parse("This is *a simple* _paragraph_ with ~~struck~~ words");
 
 
