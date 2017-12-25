@@ -1,5 +1,3 @@
-use Grammar::Tracer;
-
 # Non-horizontal whitespace
 role like-a-word {
     regex like-a-word { «\H+» }
@@ -24,8 +22,10 @@ grammar better-paragraph does pair-quoted {
 }
 
 my $simple-thing = better-paragraph.parse("Simple **thing**");
-$simple-thing<chunk>.put;
-$simple-thing<chunk>.map: { .put };
+$simple-thing<chunk>.map: { so $^þ<quoted> ??
+			    say "[ "~$^þ<quoted><span> ~ "]"!!
+			    $^þ.put};
+
 say better-paragraph.parse("This is *a simple* _paragraph_ with ~~struck~~ words");
 
 
