@@ -4,16 +4,16 @@ role like-a-word {
 }
 
 role span does like-a-word {
-    regex span { <like-a-word>(\s+ <like-a-word>)* } 
+    regex span { <like-a-word>[(\s+) <like-a-word>]* } 
 }
 
 role pair-quoted does span {
     proto regex quoted {*}
-    regex quoted:sym<em> { '*' ~ '*' <span> }
-    regex quoted:sym<alsoem> { '~' ~ '~' <span> }
-    regex quoted:sym<code> { '`' ~ '`' <span> }
-    regex quoted:sym<strong> { '**' ~ '**' <span> }
-    regex quoted:sym<strike> { '~~' ~ '~~' <span> }
+    regex quoted:sym<em> { ('*') ~ '*' <span> }
+    regex quoted:sym<alsoem> { ('~') ~ '~' <span> }
+    regex quoted:sym<code> { ('`') ~ '`' <span> }
+    regex quoted:sym<strong> { ('**') ~ '**' <span> }
+    regex quoted:sym<strike> { ('~~') ~ '~~' <span> }
 }
 
 grammar better-paragraph does pair-quoted {
@@ -23,8 +23,9 @@ grammar better-paragraph does pair-quoted {
 
 my $simple-thing = better-paragraph.parse("Simple **thing**");
 $simple-thing<chunk>.map: { so $^þ<quoted> ??
-			    say "[ "~$^þ<quoted><span> ~ "]"!!
+			    say $^þ<quoted>[0] ~ " → " ~ $^þ<quoted><span> !!
 			    $^þ.put};
+$simple-thing<chunk>.map: { $^þ.gist.put};
 
 say better-paragraph.parse("This is *a simple* _paragraph_ with ~~struck~~ words");
 
