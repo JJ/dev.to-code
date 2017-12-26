@@ -39,6 +39,15 @@ class Heading does Span {
     }
 }
 
+# Stringifier for stuff above
+proto stringify-chunk( | ) {*}
+multi stringify-chunk( $chunk where Quoted | Span ) {
+    return $chunk.to-string( " " );
+}
+multi stringify-chunk( Heading $heading ) {
+    return $heading.to-string();
+}
+
 # Solution found here http://irclog.perlgeek.de/perl6/2015-07-31
 class Paragraph {
     has stringifiable @!chunks;
@@ -48,18 +57,6 @@ class Paragraph {
     }
     
     submethod BUILD( :@!chunks ) {}
-
-    proto stringify-chunk( | ) {*}
-    multi stringify-chunk( Quoted $quoted ) {
-	return $quoted.to-string( " " );
-    }
-    multi stringify-chunk( Span $span ) {
-	return $span.to-string( " " );
-    }
-    multi stringify-chunk( Heading $heading ) {
-	return $heading.to-string();
-    }
-
     
     method to-string() {
 	return "\n" ~ (@!chunks.map: { stringify-chunk( $^þ ) }).join(" " );
