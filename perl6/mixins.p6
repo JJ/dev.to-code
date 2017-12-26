@@ -1,7 +1,11 @@
 #!/usr/bin/env perl6
 
+role stringifiable {
+    method to-string( Str $ligature ) { ... }
+}
+
 # Thanks to https://perl6advent.wordpress.com/2009/12/18/day-18-roles/
-role Span {
+role Span does stringifiable {
     has @.words;
     method to-string( Str $ligature ) {
 	return @!words.join( $ligature );
@@ -27,7 +31,7 @@ class Quoted does Span {
 
 # Solution found here http://irclog.perlgeek.de/perl6/2015-07-31
 class Paragraph {
-    has @!chunks;
+    has stringifiable @!chunks;
 
     method new( *@chunks ) {
 	return self.bless(:@chunks);
