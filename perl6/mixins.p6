@@ -29,6 +29,16 @@ class Quoted does Span {
 
 }
 
+class Heading does Span {
+
+    submethod BUILD( :@!words ) {
+    }
+    
+    method to-string() {
+	return "\n<h1>" ~ self.Span::to-string( " " ) ~ "</h1>\n";
+    }
+}
+
 # Solution found here http://irclog.perlgeek.de/perl6/2015-07-31
 class Paragraph {
     has stringifiable @!chunks;
@@ -46,6 +56,9 @@ class Paragraph {
     multi stringify-chunk( Span $span ) {
 	return $span.to-string( " " );
     }
+    multi stringify-chunk( Heading $heading ) {
+	return $heading.to-string();
+    }
 
     
     method to-string() {
@@ -53,27 +66,14 @@ class Paragraph {
     }
 }
 
-class Heading does Span {
 
-    submethod BUILD( :@!words ) {
-    }
-    
-    method to-string() {
-	return "\n<h1>" ~ self.Span::to-string( " " ) ~ "</h1>\n";
-    }
-}
-
-my $span = Span.new(words => "This goes first");
-say $span.to-string(" " );
-
-my $quoted =  Quoted.new( words => "This is last",
+my $heading = Heading.new( words => "Here we are".comb(/\w+/) );
+my $span    = Span.new( words => "This goes first");
+my $quoted  = Quoted.new( words => "This is last",
 			  quote => "em" );
-say $quoted.to-string( " " );
 
-my $sentence = Paragraph.new( $span, $quoted );
+
+my $sentence = Paragraph.new( $heading, $span, $quoted );
 
 say $sentence.to-string();
 
-my $h1 = Heading.new(words => "Heading there".comb(/\w+/));
-say $h1.words;
-say $h1.to-string();
