@@ -40,11 +40,11 @@ class Heading does Span {
 }
 
 # Stringifier for stuff above
-proto stringify-chunk( | ) {*}
+proto stringify-chunk( | )                          {*}
 multi stringify-chunk( $chunk where Quoted | Span ) {
     return $chunk.to-string( " " );
 }
-multi stringify-chunk( Heading $heading ) {
+multi stringify-chunk( Heading $heading )           {
     return $heading.to-string();
 }
 
@@ -64,9 +64,9 @@ class Paragraph {
 }
 
 
-my $heading = Heading.new( words => "Here we are".comb(/\w+/) );
-my $span    = Span.new( words => "This goes first");
-my $quoted  = Quoted.new( words => "This is last",
+my $heading  = Heading.new( words => "Here we are".comb(/\w+/) );
+my $span     = Span.new( words => "This goes first");
+my $quoted   = Quoted.new( words => "This is last",
 			  quote => "em" );
 
 
