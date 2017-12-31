@@ -29,10 +29,12 @@ is( $simple-thing<chunk>.elems, 2, "Two chunks");
 my $not-so-simple-paragraph= paragraph.parse("This is *a simple* _paragraph_ with ~~struck~~ words and [links](https://to.nowhere)");
 is( $not-so-simple-paragraph<chunk>.elems, 6, "6 chunks");
 like( ~$not-so-simple-paragraph<chunk>[0], /This/, "Chunking OK");
-say( $not-so-simple-paragraph<chunk>[5]);
 is( $not-so-simple-paragraph<chunk>[5]<link><span>, "links", "Links");
-done-testing();
 
+my $period = "This ends with a period.";
+like( ~$period, /\./, "Symbols are good");
+say $period;
+done-testing();
 
 
 
