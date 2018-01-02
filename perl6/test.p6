@@ -33,7 +33,7 @@ is( $not-so-simple-paragraph<chunk>[5]<link><span>, "links", "Links");
 
 my $period = "This ends with a period.";
 like( ~$period, /\./, "Symbols are good");
-say $period;
+
 done-testing();
 
 
