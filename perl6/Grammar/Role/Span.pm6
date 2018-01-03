@@ -1,5 +1,5 @@
 role Like-a-word {
-    token like-a-word { \H+ }
+    token like-a-word { \S+ }
 }
 
 role Span does Like-a-word {

@@ -8,7 +8,7 @@ Paragraph
 END
 
 isnt Span.parse($paragraph).WHAT, "Any", "Well parsed";
-isnt Span.parse("Difficult paragraph").WHAT, "Any", "Well parsed too";
+isnt Span.parse("Difficult paragraph.").WHAT, "Any", "Well parsed too";
 
 
 

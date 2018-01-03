@@ -1,12 +1,12 @@
 use Grammar::Tracer;
-use Grammar::Span;
+use Grammar::Role::Span;
 
 grammar Grammar::Headers does Span {
-    token TOP {^ <header> \v $}
+    token TOP {^ <header> \v* $}
 
     token hashes { '#'**1..6 }
 
-    token header { (<hashes>) <span> $0? }
+    token header { (<hashes>) \h+ <span> \h* $0? }
 }
 
 my $paragraph = q:to/END/;
