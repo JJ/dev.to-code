@@ -8,7 +8,7 @@ grammar Grammar::Headers does Span {
 
     token hashes { '#'**1..6 }
 
-    token header { (<hashes>) \h+ <span> \h* $0? }
+    regex header { <hashes> ~ <hashes>? \h+ <span> \h* }
 }
 
 my $paragraph = q:to/END/;
@@ -16,6 +16,11 @@ my $paragraph = q:to/END/;
 END
 my $parsed = Grammar::Headers.parse($paragraph);
 say $parsed;
+
+$paragraph = q:to/END/;
+## Easier ##
+END
+say Grammar::Headers.parse($paragraph);
 
 $paragraph = q:to/END/;
 ## Easy peasy ##
