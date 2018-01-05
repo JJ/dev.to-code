@@ -8,7 +8,7 @@ grammar Grammar::Headers does Span {
 
     token hashes { '#'**1..6 }
 
-    regex header { <hashes> ~ <hashes>? \h+ <span> \h* }
+    regex header {^^ <hashes> \h+ <span> [\h* $0]? $$}
 }
 
 my $paragraph = q:to/END/;

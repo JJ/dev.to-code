@@ -3,5 +3,5 @@ role Like-a-word {
 }
 
 role Span does Like-a-word {
-    regex span { <like-a-word>[\s+ <like-a-word>]* } 
+    regex span { <like-a-word>[\s+ <like-a-word>]*? } 
 }
