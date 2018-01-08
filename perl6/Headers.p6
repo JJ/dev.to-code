@@ -3,12 +3,21 @@
 use Grammar::Tracer;
 use Grammar::Role::Span;
 
-grammar Grammar::Headers does Span {
+role Grammar::Role::Hashes[$n=1..6] {
+    token hashes( $n ) { '#' ** $n }
+}
+
+role Grammar::Role::Header[$n=1] does Grammar::Role::Hashes[$n] {
+    regex header( $n ) {^^ (<hashes({$n})>) \h+ <span> [\h* $0]? $$}
+}
+
+grammar Grammar::Headers does Grammar::Role::Header[1]  {
+    
+    
     token TOP {^ <header> \v+ $}
 
-    token hashes { '#'**1..6 }
-
-    regex header {^^ (<hashes>) \h+ <span> [\h* $0]? $$}
+    token header  { <header(1)> }
+   
 }
 
 my $paragraph = q:to/END/;
