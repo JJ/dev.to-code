@@ -29,6 +29,14 @@ END
 $parsed = Grammar::Headers.parse($paragraph);
 say $parsed;
 
+$paragraph = q:to/END/;
+## Easy peasy ###
+END
+say Grammar::Headers.parse($paragraph);
 
+$paragraph = q:to/END/;
+## Easy peasy #
+END
+say Grammar::Headers.parse($paragraph);
 
 
